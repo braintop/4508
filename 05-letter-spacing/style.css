@@ -1,0 +1,14 @@
+.container {
+    color: #11995E;
+    width: fit-content;
+  }
+  h1 {
+    color: #99676F;
+    line-height: 1.5;
+    border: orange solid;
+  }
+  .main {
+    border: 1px blue solid;
+    line-height: 0.5;
+  }
+  

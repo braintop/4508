@@ -1,0 +1,13 @@
+.container{
+    color: red; 
+  
+}
+h1{
+    text-align: center;
+    color:#99676f;
+}
+.main{
+    border: 1px blue solid;
+    letter-spacing: 5px;
+    width: 200px;
+  }

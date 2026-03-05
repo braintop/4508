@@ -1,0 +1,14 @@
+.container{
+    color: red; 
+  
+}
+.up{
+    text-transform: uppercase;
+    color: blue;
+}
+.low{
+    text-transform: lowercase;
+}
+.cap{
+    text-transform: capitalize;
+}
