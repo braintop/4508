@@ -1,0 +1,12 @@
+.ad{
+  position: fixed;
+  top: 20%;
+  left: -60px;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+}
+.ad:hover{
+  background-color: blue;
+  left:5px;
+}

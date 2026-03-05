@@ -1,0 +1,13 @@
+h1{
+  color:blue;
+  text-decoration: underline;
+  text-shadow: 2px 2px 2px red;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+p{
+  word-spacing: 3px;
+  color:black;
+  text-indent: 75px;
+}
