@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #f00f0f;
+}
+
+/* display: flex על הקונטיינר הראשי */
+.products {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* עיצוב כל כרטיס */
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    margin-bottom: 12px;
+    color: #2c3e50;
+    font-size: 1.3rem;
+}
+
+.card p {
+    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* הכפתור תמיד בתחתית הכרטיס */
+.card button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.card button:hover {
+    background-color: #2980b9;
+}

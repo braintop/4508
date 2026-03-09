@@ -1,0 +1,16 @@
+.products{
+    border: 3px solid salmon;
+    display: flex;
+    flex-direction: column; 
+    gap: 100px;
+ 
+}
+.card{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: 10px solid pink;
+}

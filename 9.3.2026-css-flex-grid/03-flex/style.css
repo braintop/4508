@@ -1,0 +1,16 @@
+.container{
+    border: 3px solid salmon;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+
+}
+.container div{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+}

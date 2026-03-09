@@ -1,0 +1,27 @@
+body {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  gap:10px;
+}
+
+header,footer{
+  grid-column: span 3;
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+main{
+  font-size: 20px;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+aside{
+  height: 100vh;
+  background-color: green;
+}

@@ -1,0 +1,69 @@
+.a{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transform: scaleX(2);
+
+}
+.b{
+    margin-top: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    transform: scaleY(2);
+}
+.c{
+    margin-top: 100px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    rotate:45deg;
+
+}
+.d{
+    width: 200px;
+    height: 200px;
+    background: blue;
+    transition: width 1s, height 2s;
+  
+}
+.d:hover {
+    width: 400px;
+    height: 400px;
+  }
+.e{
+    width: 200px;
+    height: 200px;
+    background-color: blueviolet;
+    animation-name: firstAnim;
+    animation-duration: 3s;
+    animation-iteration-count: 3;
+  
+}
+
+.f{
+    width: 400px;
+    height: 200px;
+    background-color: orange;
+    transform: translate(50px, 100px);
+    transition: transform 3s;
+}
+.f:hover{
+    transform: translate(300px, 200px);
+}
+@keyframes firstAnim {
+    0% {
+      background-color: blueviolet;
+    }
+    30% {
+      background-color: red;
+      width: 400px;
+      height: 400px;
+    }
+    100% {
+        background-color: green;
+        width: 200px;
+        height: 200px;
+      }
+  
+  }
