@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>קולנוע סטאר - אודות</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">דף הבית</a>
+    <a href="about.html" class="active">אודות</a>
+  </nav>
+
+  <h1>אודות קולנוע סטאר</h1>
+
+  <div class="about-content">
+    <p>
+      קולנוע סטאר הוקם בשנת 2020 ומציע חוויית צפייה ייחודית עם אולמות מתקדמים,
+      מערכת סאונד מתקדמת ומושבים נוחים במיוחד. אנו מקרינים מגוון סרטים מכל הז'אנרים
+      ומציעים מחירים הוגנים לכל המשפחה.
+    </p>
+    <p>
+      המערכת הדיגיטלית שלנו מאפשרת למנהלי הקולנוע לנהל את רשימת הסרטים המוקרנים
+      בצורה נוחה ויעילה.
+    </p>
+
+    <h2>פרטי המפתח</h2>
+    <p>שם התלמיד: _____________</p>
+
+    <div id="movie-counter"></div>
+  </div>
+
+  <script>
+    // Bonus: Movie counter from LocalStorage
+    const data = localStorage.getItem('movies');
+    const movies = data ? JSON.parse(data) : [];
+    const counter = document.getElementById('movie-counter');
+    counter.innerHTML = '<p>סרטים במערכת כרגע: <strong>' + movies.length + '</strong></p>';
+  </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+/* === General === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  color: #e94560;
+  font-size: 2.5em;
+  margin: 20px 0 30px;
+}
+
+h2 {
+  color: #e94560;
+  margin: 20px 0 10px;
+}
+
+/* === Navigation === */
+nav {
+  background-color: #16213e;
+  padding: 15px 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+nav a {
+  color: #a8a8d8;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  background-color: #e94560;
+  color: #fff;
+}
+
+/* === Form === */
+form {
+  background-color: #16213e;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #0f3460;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #a8a8d8;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input, select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #0f3460;
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1em;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+button[type="submit"] {
+  grid-column: 1 / -1;
+  padding: 12px;
+  background-color: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 700;
+  font-family: 'Heebo', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #c73650;
+}
+
+/* === Stats === */
+#stats {
+  background-color: #16213e;
+  padding: 15px 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.1em;
+  color: #a8a8d8;
+}
+
+/* === Table === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #0f3460;
+}
+
+th {
+  padding: 12px 10px;
+  color: #e94560;
+  font-weight: 700;
+  text-align: center;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #16213e;
+}
+
+tbody tr {
+  background-color: #1a1a2e;
+  transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #222244;
+}
+
+td img {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.delete-btn {
+  background-color: #e94560;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #ff6b81;
+}
+
+/* === Genre Colors === */
+.genre-action    { background-color: #ffcccc; color: #333; }
+.genre-comedy    { background-color: #ffffcc; color: #333; }
+.genre-drama     { background-color: #ccccff; color: #333; }
+.genre-horror    { background-color: #444444; color: #fff; }
+.genre-scifi     { background-color: #e6ccff; color: #333; }
+.genre-animation { background-color: #ccffcc; color: #333; }
+
+/* === About Page === */
+.about-content {
+  background-color: #16213e;
+  padding: 30px;
+  border-radius: 12px;
+  line-height: 1.8;
+}
+
+.about-content p {
+  margin-bottom: 15px;
+}
+
+#movie-counter {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #0f3460;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 0.85em;
+  }
+
+}

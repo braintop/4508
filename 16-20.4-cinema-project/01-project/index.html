@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>קולנוע סטאר - ניהול סרטים</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="active">דף הבית</a>
+    <a href="about.html">אודות</a>
+  </nav>
+
+  <h1>קולנוע סטאר</h1>
+
+  <form id="movieForm" onsubmit="addMovie(event)">
+    <div class="form-group">
+      <label for="genre">ז'אנר:</label>
+      <select id="genre" required>
+        <option value="">בחר ז'אנר</option>
+        <option value="אקשן">אקשן</option>
+        <option value="קומדיה">קומדיה</option>
+        <option value="דרמה">דרמה</option>
+        <option value="אימה">אימה</option>
+        <option value="מדע בדיוני">מדע בדיוני</option>
+        <option value="אנימציה">אנימציה</option>
+
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="name">שם הסרט:</label>
+      <input type="text"  value="oren" id="name" required minlength="2" placeholder="הכנס שם סרט">
+    </div>
+
+    <div class="form-group">
+      <label for="director">במאי:</label>
+      <input type="text" value="david"  id="director" required minlength="2" placeholder="הכנס שם במאי">
+    </div>
+
+    <div class="form-group">
+      <label for="duration">משך (דקות):</label>
+      <input type="number"  value="12"  id="duration" required min="1" max="300" placeholder="120">
+    </div>
+
+    <div class="form-group">
+      <label for="price">מחיר כרטיס:</label>
+      <input type="number" value="4"  id="price" required min="1" max="200" placeholder="45">
+    </div>
+
+    <div class="form-group">
+      <label for="poster">קישור לפוסטר:</label>
+      <input type="url"  value="https://example.com/poster.jpg" id="poster" required placeholder="https://example.com/poster.jpg">
+    </div>
+
+    <div class="form-group">
+      <label for="date">תאריך הקרנה:</label>
+      <input type="date"  value="2026-04-23" id="date" required>
+    </div>
+
+    <button type="submit">הוסף סרט</button>
+  </form>
+
+  <div id="stats"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ז'אנר</th>
+        <th>שם הסרט</th>
+        <th>במאי</th>
+        <th>משך (דקות)</th>
+        <th>מחיר</th>
+        <th>פוסטר</th>
+        <th>תאריך הקרנה</th>
+        <th>מחיקה</th>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      
+    </tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>
