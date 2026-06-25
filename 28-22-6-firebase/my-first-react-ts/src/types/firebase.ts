@@ -23,5 +23,17 @@ interface FirestoreDoc {
     photoURL: string | null
     createdAt: Date
   }
+
+
+  export interface Product extends FirestoreDoc {
+    name: string
+    description: string
+    createdAt: Date
+    price:  number,
+    completed: boolean
+  }
+              
+  export type New_Product = Omit<Product, 'id'>
+
   
   export type NewUserProfile = Omit<UserProfile, 'id'>

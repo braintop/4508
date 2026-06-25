@@ -6,7 +6,7 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore'
 import { db } from './firebase'
-import type { Todo, UserProfile } from './types/firebase'
+import type { Todo, UserProfile, Product } from './types/firebase'
 
 // Converter = מתרגם בין אובייקט TypeScript לבין מסמך Firestore
 // כשקוראים מסמך — מוסיפים את ה-id (Firestore יוצר אותו אוטומטית)
@@ -26,7 +26,13 @@ export const todosCollection = collection(db, 'todos').withConverter(
   createConverter<Todo>()
 )
 
+
+
 // הפניה לאוסף users (לשימוש עתידי)
 export const usersCollection = collection(db, 'users').withConverter(
   createConverter<UserProfile>()
 )
+export const productsCollection = collection(db, 'products').withConverter(
+  createConverter<Product>()
+ )
+ 
