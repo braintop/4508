@@ -8,9 +8,10 @@ function App() {
   return (
     <main className="app">
       <h1>Firebase — שיעור ראשון</h1>
-      {/* <AskGemini /> */}
-      {/* <AddProduct /> */}
-      <SimpleChat />
+      {/* <AskGemini />  */}
+      <AddTodo />
+      <GetAllTodos />
+      {/* <SimpleChat /> */}
     </main>
   )
 }

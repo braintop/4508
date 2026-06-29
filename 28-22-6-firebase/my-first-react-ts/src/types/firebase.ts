@@ -23,7 +23,7 @@ interface FirestoreDoc {
     photoURL: string | null
     createdAt: Date
   }
-
+  export type NewUserProfile = Omit<UserProfile, 'id'>
 
   export interface Product extends FirestoreDoc {
     name: string
@@ -36,4 +36,3 @@ interface FirestoreDoc {
   export type New_Product = Omit<Product, 'id'>
 
   
-  export type NewUserProfile = Omit<UserProfile, 'id'>
