@@ -17,12 +17,6 @@ export default function CounterPage() {
     const lastName = useSelector(
         (state: RootState) => state.user.lastName
     );
-    const email = useSelector(
-        (state: RootState) => state.user.email
-    );
-    const age = useSelector(
-        (state: RootState) => state.user.age
-    );
     // מאפשר לשלוח פעולות ל-Redux
     const dispatch = useDispatch();
 
