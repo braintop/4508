@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import type Movie from "../models/Movie";
+import { addMovie } from "../ticketSlice/ticketSlice";
 
 interface Props {
     movie: Movie;
@@ -7,9 +9,14 @@ interface Props {
 
 export default function MovieCard({ movie }: Props) {
     const [showInfo, setShowInfo] = useState(false);
+    const dispatch = useDispatch();
 
     function toggleInfo() {
         setShowInfo(!showInfo);
+    }
+
+    function selectTicket() {
+        dispatch(addMovie(movie));
     }
 
     return (
@@ -22,7 +29,7 @@ export default function MovieCard({ movie }: Props) {
             <p>Price: ₪{movie.price}</p>
 
             <button onClick={toggleInfo}>More Info</button>
-            <button>Select Ticket</button>
+            <button onClick={selectTicket}>Select Ticket</button>
 
             {showInfo && (
                 <div>
@@ -31,7 +38,6 @@ export default function MovieCard({ movie }: Props) {
                     <p>Director: {movie.director}</p>
                     <p>Actors: {movie.actors}</p>
                     <p>Duration: {movie.duration} minutes</p>
-                    <p>Show Times:</p>
                     <ul>
                         {movie.showTimes.map(time => (
                             <li key={time}>{time}</li>
@@ -42,3 +48,5 @@ export default function MovieCard({ movie }: Props) {
         </div>
     );
 }
+
+

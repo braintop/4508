@@ -1,37 +1,72 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type Movie from "../models/Movie";
 
 interface TicketState {
-    movieName: string;
-    ticketsCount: number;
-    price: number;
+    selectedMovies: Movie[];
+    error: string;
+}
+
+function loadFromLocalStorage(): Movie[] {
+    const data = localStorage.getItem("selectedMovies");
+
+    if (data) {
+        return JSON.parse(data);
+    }
+
+    return [];
+}
+
+function saveToLocalStorage(movies: Movie[]) {
+    localStorage.setItem("selectedMovies", JSON.stringify(movies));
 }
 
 const initialState: TicketState = {
-    movieName: "Avatar",
-    ticketsCount: 0,
-    price: 45
+    selectedMovies: loadFromLocalStorage(),
+    error: ""
 };
 
 const ticketSlice = createSlice({
     name: "tickets",
     initialState,
     reducers: {
-        addTicket: (state) => {
-            state.ticketsCount = state.ticketsCount + 1;
-        },
-        removeTicket: (state) => {
-            if (state.ticketsCount > 0) {
-                state.ticketsCount = state.ticketsCount - 1;
+        addMovie: (state, action: PayloadAction<Movie>) => {
+            const exists = state.selectedMovies.some(
+                movie => movie.id === action.payload.id
+            );
+
+            if (exists) {
+                state.error = "הסרט כבר נבחר";
+                return;
             }
+
+            if (state.selectedMovies.length >= 5) {
+                state.error = "ניתן לבחור עד 5 סרטים בלבד";
+                return;
+            }
+
+            state.selectedMovies.push(action.payload);
+            saveToLocalStorage(state.selectedMovies);
+            state.error = "";
+        },
+        removeMovie: (state, action: PayloadAction<number>) => {
+            state.selectedMovies = state.selectedMovies.filter(
+                movie => movie.id !== action.payload
+            );
+            saveToLocalStorage(state.selectedMovies);
+            state.error = "";
         },
         resetTickets: (state) => {
-            state.ticketsCount = 0;
+            state.selectedMovies = [];
+            saveToLocalStorage(state.selectedMovies);
+            state.error = "";
+        },
+        clearError: (state) => {
+            state.error = "";
         }
     }
 });
 
-export const { addTicket, removeTicket, resetTickets } = ticketSlice.actions;
+export const { addMovie, removeMovie, resetTickets, clearError } = ticketSlice.actions;
 export default ticketSlice.reducer;
-
 
 
