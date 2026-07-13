@@ -33,9 +33,6 @@ let books = [
 ];
 
 app.use(express.json());
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello from Express!');
-});
 
 app.get('/api/users', (req: Request, res: Response) => {
     res.json(users);
@@ -46,19 +43,6 @@ app.get('/api/users/:id', (req: Request, res: Response) => {
         return res.status(404).json({ message: 'User not found' });
     }
     res.json(user);
-});
-
-//(book)=>{book.id == Number(req.params.id)}
-app.get('/api/books/:id/:page', (req: Request, res: Response) => {
-
-    const book = books.find((book) => book.id == Number(req.params.id));
-    if (!book) {
-        return res.status(404).json({ message: 'Book not found' });
-    }
-    if (Number(req.params.page) > book.pages) {
-        return res.status(404).json({ message: 'Page not found' });
-    }
-    res.json(book);
 });
 
 
@@ -78,6 +62,7 @@ app.post('/api/users', (req: Request, res: Response) => {//{id:3}
     users.push(user);
     res.json(user);
 });
+
 app.delete('/api/users/:id', (req: Request, res: Response) => {
     const user = users.find((user) => user.id == Number(req.params.id));
     if (!user) {
@@ -85,6 +70,70 @@ app.delete('/api/users/:id', (req: Request, res: Response) => {
     }
     users = users.filter((user) => user.id != Number(req.params.id));
     res.json({ message: 'User deleted' });
+});
+
+app.put('/api/users/:id', (req: Request, res: Response) => {
+    const user = users.find((user) => user.id == Number(req.params.id));
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    user.name = req.body.name;
+    user.email = req.body.email;
+    res.json(user);
+});
+
+
+app.get('/api/books', (req: Request, res: Response) => {
+    res.json(books);
+});
+
+app.get('/api/books/:id', (req: Request, res: Response) => {
+    const book = books.find((book) => book.id == Number(req.params.id));
+    if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+    }
+    res.json(book);
+});
+
+app.post('/api/books', (req: Request, res: Response) => {
+    if (!req.body.title) {
+        return res.status(400).json({ message: 'Title is required' });
+    }
+    if (!req.body.author) {
+        return res.status(400).json({ message: 'Author is required' });
+    }
+    if (!req.body.pages) {
+        return res.status(400).json({ message: 'Pages is required' });
+    }
+    const book = {
+        id: books[books.length-1].id + 1,
+        title: req.body.title,
+        author: req.body.author,
+        pages: req.body.pages,
+    };
+    books.push(book);
+    res.json(book);
+});
+
+
+app.delete('/api/books/:id', (req: Request, res: Response) => {
+    const book = books.find((book) => book.id == Number(req.params.id));
+    if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+    }
+    books = books.filter((book) => book.id != Number(req.params.id));
+    res.json({ message: 'Book deleted' });
+});
+
+app.put('/api/books/:id', (req: Request, res: Response) => {
+    const book = books.find((book) => book.id == Number(req.params.id));
+    if (!book) {
+        return res.status(404).json({ message: 'Book not found' });
+    }
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.pages = req.body.pages;
+    res.json(book);
 });
 
 // Start the server
