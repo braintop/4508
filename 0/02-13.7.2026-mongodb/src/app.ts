@@ -1,3 +1,6 @@
+//dont forget to  - npm install mongoose
+//npm run build 
+//npm start
 import mongoose, { type ConnectOptions } from 'mongoose';
 
 const uri: string =
