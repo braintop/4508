@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import mongoose, { type ConnectOptions } from 'mongoose';
 import { UserModel } from './models/UserSchema';
+import { ProductModel } from './models/ProductShema';
 import express from 'express';
 const app = express();
 app.use(express.json());
@@ -75,9 +76,55 @@ app.delete('/api/users/:id', async (req: Request, res: Response) => {
   }
   res.status(200).json(user);
 });
+
+app.post('/api/products', async (req: Request, res: Response) => {
+  const product = await ProductModel.create(req.body);
+  if (!product) {
+    return res.status(400).json({ message: 'Product not created' });
+  }
+  res.status(201).json(product);
+});
+
+app.get('/api/products', async (req: Request, res: Response) => {
+  const products = await ProductModel.find();
+  res.status(200).json(products);
+});
+
+app.get('/api/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params; //{id: '123'}
+  const product = await ProductModel.findOne({ _id: id });
+  if (!product) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(200).json(product);
+});
+app.get('/api/products/:category', async (req: Request, res: Response) => {
+  const { category } = req.params;
+  const products = await ProductModel.find({ category: category, isAvailable: true });
+  res.status(200).json(products);
+});
+app.put('/api/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const product = await ProductModel.findByIdAndUpdate(id, req.body, { new: true });
+  if (!product) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(200).json(product);
+});
+
+app.delete('/api/products/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const product = await ProductModel.findByIdAndDelete(id);
+  if (!product) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
+  res.status(200).json(product);
+});
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
+
+
 
 
 //database <=> server node <=> client browser
