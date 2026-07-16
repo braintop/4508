@@ -27,13 +27,28 @@ async function run() {
     }
 }
 run().catch(console.dir);
+//create a user
 app.post('/api/users', async (req, res) => {
     const user = await UserSchema_1.UserModel.create(req.body);
+    if (!user) {
+        return res.status(400).json({ message: 'User not created' });
+    }
     res.status(201).json(user);
 });
+//get all users
 app.get('/api/users', async (req, res) => {
+    console.log("message from server");
     const users = await UserSchema_1.UserModel.find();
     res.status(200).json(users);
+});
+//get a user by id
+app.get('/api/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const user = await UserSchema_1.UserModel.findOne({ _id: id });
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
 });
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
