@@ -1,8 +1,9 @@
-//dont forget to  - npm install mongoose
-//npm run build 
-//npm start
+import {Request, Response} from 'express';
 import mongoose, { type ConnectOptions } from 'mongoose';
-
+import { UserModel } from './models/UserSchema';
+import express from 'express';
+const app = express();
+app.use(express.json());
 const uri: string =
   'mongodb+srv://david:Aa123456@cluster0.pzqsa4v.mongodb.net/?appName=Cluster0';
 
@@ -22,11 +23,27 @@ async function run(): Promise<void> {
     await db.admin().command({ ping: 1 });
     console.log('Pinged your deployment. You successfully connected to MongoDB!');
   } finally {
-    await mongoose.disconnect();
+    //await mongoose.disconnect();
   }
 }
 
 run().catch(console.dir);
+
+app.post('/api/users', async (req: Request, res: Response) => {
+  const user = await UserModel.create(req.body);
+  if (!user) {
+    return res.status(400).json({ message: 'User not created' });
+  }
+  res.status(201).json(user);
+});
+
+app.get('/api/users', async (req: Request, res: Response) => {
+  const users = await UserModel.find();
+  res.status(200).json(users);
+});
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
 
 
 //database <=> server node <=> client browser
