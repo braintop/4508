@@ -5,6 +5,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import carRoutes from './routes/carRoutes';
 import flightRoutes from './routes/flightRoute';
+import bookRoutes from './routes/bookRoutes';
 const app = express();
 
 dotenv.config();
@@ -38,6 +39,7 @@ run().catch(console.dir);
 
 app.use('/api/cars', carRoutes);
 app.use('/api/flights', flightRoutes);
+app.use('/api/books', bookRoutes);
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
