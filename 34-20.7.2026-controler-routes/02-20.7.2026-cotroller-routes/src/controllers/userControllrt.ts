@@ -1,9 +1,14 @@
 import { Request, Response } from 'express';
 import { UserModel } from '../models/UserModel';
-
+import bcrypt from 'bcrypt';
+    //npm i bcrypt
+    //npm i -D @types/bcrypt
 export const createUser = async (req: Request, res: Response) => {
     const { username, email, password, age, isActive } = req.body;
-    const user = await UserModel.create({ username, email, password, age, isActive });
+
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await UserModel.create({ username, email, password:hashedPassword, age, isActive });
     res.status(201).json(user);
 }
 
@@ -37,3 +42,42 @@ export const getUserById = async (req: Request, res: Response) => {
     }
     res.status(200).json(user);
 }
+
+
+export const loginUser = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { email, password } = req.body;
+  
+      const user = await UserModel.findOne({ email });
+  
+      if (!user) {
+        res.status(401).json({
+          message: 'Invalid email or password',
+        });
+        return;
+      }
+  
+      const isPasswordCorrect = await bcrypt.compare(
+        password,
+        user.password
+      );
+  
+      if (!isPasswordCorrect) {
+        res.status(401).json({
+          message: 'Invalid email or password',
+        });
+        return;
+      }
+  
+      res.status(200).json({
+        message: 'Login successful',
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Server error',
+      });
+    }
+  };
