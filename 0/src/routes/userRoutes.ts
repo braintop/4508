@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { registerUser, getUsers, deleteUser, getUserById, updateUser } from '../conrollers/userControllrt';
 import { loginUser } from '../conrollers/userControllrt';
-import { hashPassword } from '../lib/userlib';
-import { isAdmin } from '../lib/userlib';
+import { hashPassword } from '../middlewares/userlib';
+import { isAdmin } from '../middlewares/userlib';
 const router = Router();
 
 router.post('/register', hashPassword, registerUser);
