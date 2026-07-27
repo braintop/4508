@@ -102,7 +102,7 @@ app.get('/api/products/:id', async (req: Request, res: Response) => {
   }
   res.status(200).json(product);
 });
-app.get('/api/products/:category', async (req: Request, res: Response) => {
+app.get('/api/products/category/:category', async (req: Request, res: Response) => {
   const { category } = req.params;
   const products = await ProductModel.find({ category: category, isAvailable: true });
   res.status(200).json(products);

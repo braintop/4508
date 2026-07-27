@@ -2,7 +2,11 @@ import { Request, Response } from 'express';
 import { BookModel } from '../models/BookModel';
 
 export const createBook = async (req: Request, res: Response) => {
+    console.log('role:', (req as any).role);//req.role 
     const { title, author, price, pages, category, instock } = req.body;
+    if (!title || !author || !price || !pages || !category || !instock) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
     const book = await BookModel.create({ title, author, price, pages, category, instock });
     res.status(201).json(book);
 }

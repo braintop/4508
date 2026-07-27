@@ -9,22 +9,22 @@ import bookRoutes from './routes/bookRoutes';
 import userRoutes from './routes/userRoutes';
 const app = express();
 
-function printTime(req: Request, res: Response, next: NextFunction) {
-  const now = new Date();
-  console.log(now.toLocaleString()); 
-  next();
-}
-app.use(printTime);// app.use means middleware
-app.use((req, res, next) => {
-  console.log('method:', req.method);
-  next();
-});
-app.use((req, res, next) => {
-  console.log('url:', req.originalUrl);
-  next();
-});
+// function printTime(req: Request, res: Response, next: NextFunction) {
+//   const now = new Date();
+//   console.log(now.toLocaleString()); 
+//   next();
+// }
+//app.use(printTime);// app.use means middleware
+// app.use((req, res, next) => {
+//   console.log('method:', req.method);//get post put delete
+//   next();
+// });
+// app.use((req, res, next) => {
+//   console.log('url:', req.originalUrl);
+//   next();
+// });
 function logOriginalUrl(req: Request, res: Response, next: NextFunction) {
-  (req as any).role = 'user';
+  (req as any).role = 'we love sharon';
   console.log('Request URL:', req.originalUrl);
   next();
 }
@@ -40,7 +40,7 @@ function isAdmin(req: Request, res: Response, next: NextFunction) {
     return res.status(403).json({ message: 'Unauthorized' });
   }
 }
-const logStuff = [logOriginalUrl, logMethod];
+//const logStuff = [logOriginalUrl, logMethod];
 
 app.listen(3000);
 
@@ -75,10 +75,12 @@ async function run(): Promise<void> {
 run().catch(console.dir);
 
 
-app.use('/api/cars', logStuff, carRoutes);
-app.use('/api/flights',logMethod, isAdmin, flightRoutes);
-app.use('/api/books', isAdmin, bookRoutes);
+app.use('/api/cars',isAdmin, carRoutes);
+app.use('/api/flights', flightRoutes);
+app.use('/api/books', bookRoutes);
 app.use('/api/users', userRoutes);
+
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
