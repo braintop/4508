@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'; 
 import { UserModel } from '../models/UserModel';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
     //npm i bcrypt
     //npm i -D @types/bcrypt
 export const registerUser = async (req: Request, res: Response) => {
@@ -40,14 +41,12 @@ export const getUserById = async (req: Request, res: Response) => {
     res.status(200).json(user);
 }
 
-
 export const loginUser = async (
     req: Request,
     res: Response
   ): Promise<void> => {
     try {
       const { email, password } = req.body;
-  
       const user = await UserModel.findOne({ email });
   
       if (!user) {
@@ -61,6 +60,20 @@ export const loginUser = async (
         password,
         user.password
       );
+      if (!isPasswordCorrect) {
+        res.status(401).json({
+          message: 'Invalid email or password',
+        });
+        return;
+      }
+      const secretKey = process.env.JWT_SECRET;
+      if (!secretKey) {
+        res.status(500).json({
+          message: 'Server error',
+        });
+        return;
+      }
+      const token = jwt.sign({ email }, secretKey, { expiresIn: '1h' });
   
       if (!isPasswordCorrect) {
         res.status(401).json({
@@ -71,6 +84,7 @@ export const loginUser = async (
   
       res.status(200).json({
         message: 'Login successful',
+        token,
       });
     } catch (error) {
       res.status(500).json({
