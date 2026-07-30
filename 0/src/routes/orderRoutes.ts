@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { isAdmin } from '../middlewares/userlib';
+import { checkToken } from '../middlewares/authMiddleware';
 import {
   createOrder,
   getOrders,
@@ -16,7 +17,7 @@ const router = Router();
 
 router.post('/',isAdmin, validateOrder, createOrder);
 
-router.get('/', getOrders);
+router.get('/',checkToken, getOrders);
 
 router.get('/price/:price', getOrdersAbovePrice);
 

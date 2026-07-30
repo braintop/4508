@@ -50,8 +50,11 @@ export const createOrder = async (
   ): Promise<void> => {
     try {
       const orders = await OrderModel.find();
-  
-      res.status(200).json(orders);
+      console.log(req.body);
+      res.status(200).json({
+        message: 'Orders fetched successfully',
+        orders,
+      });
     } catch (error) {
       res.status(500).json({
         message: 'Server error',

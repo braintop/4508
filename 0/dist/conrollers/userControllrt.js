@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
             });
             return;
         }
-        const token = jsonwebtoken_1.default.sign({ email }, secretKey, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ email, role: user.role }, secretKey, { expiresIn: '1h' });
         if (!isPasswordCorrect) {
             res.status(401).json({
                 message: 'Invalid email or password',

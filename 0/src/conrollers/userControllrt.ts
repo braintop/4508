@@ -73,7 +73,7 @@ export const loginUser = async (
         });
         return;
       }
-      const token = jwt.sign({ email }, secretKey, { expiresIn: '1h' });
+      const token = jwt.sign({ email, role: user.role }, secretKey, { expiresIn: '1h' });
   
       if (!isPasswordCorrect) {
         res.status(401).json({

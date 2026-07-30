@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const userlib_1 = require("../middlewares/userlib");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
 const orederController_1 = require("../conrollers/orederController");
 const validateOrder_1 = require("../middlewares/validateOrder");
 const router = (0, express_1.Router)();
 router.post('/', userlib_1.isAdmin, validateOrder_1.validateOrder, orederController_1.createOrder);
-router.get('/', orederController_1.getOrders);
+router.get('/', authMiddleware_1.checkToken, orederController_1.getOrders);
 router.get('/price/:price', orederController_1.getOrdersAbovePrice);
 router.patch('/:id/status', orederController_1.updateOrderStatus);
 router.get('/:id', orederController_1.getOrderById);
