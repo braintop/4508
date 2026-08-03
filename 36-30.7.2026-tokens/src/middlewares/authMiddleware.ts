@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
+ 
 
 export const checkToken = (
   req: Request,
@@ -41,7 +41,9 @@ try {
     req.body = req.body ?? {};
     req.body.currentUser = decoded;
    // console.log("req.body.currentUser",req.body.currentUser);
-    next();
+   
+   
+   next();
   } catch (error) {
     console.log("error",error);
     res.status(401).json({

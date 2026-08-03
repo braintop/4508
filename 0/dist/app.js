@@ -7,8 +7,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const express_1 = __importDefault(require("express"));
 //npm i dotenv
 const dotenv_1 = __importDefault(require("dotenv"));
-const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
-const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
+const hotelRoutes_1 = __importDefault(require("./routes/hotelRoutes"));
 const app = (0, express_1.default)();
 app.listen(3000);
 dotenv_1.default.config();
@@ -35,8 +34,7 @@ async function run() {
     }
 }
 run().catch(console.dir);
-app.use('/api/users', userRoutes_1.default);
-app.use('/api/orders', orderRoutes_1.default);
+app.use('/api/hotels', hotelRoutes_1.default);
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
 });

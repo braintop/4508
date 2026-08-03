@@ -2,8 +2,7 @@ import mongoose, { type ConnectOptions } from 'mongoose';
 import express from 'express';
 //npm i dotenv
 import dotenv from 'dotenv';
-import userRoutes from './routes/userRoutes';
-import orderRoutes from './routes/orderRoutes';
+import hotelRoutes from './routes/hotelRoutes';
 const app = express();
 app.listen(3000);
 dotenv.config();
@@ -33,8 +32,8 @@ async function run(): Promise<void> {
   }
 }
 run().catch(console.dir);
-app.use('/api/users', userRoutes);
-app.use('/api/orders', orderRoutes);
+
+app.use('/api/hotels', hotelRoutes);
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

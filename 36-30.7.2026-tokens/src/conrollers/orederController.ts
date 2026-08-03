@@ -51,6 +51,7 @@ export const createOrder = async (
     try {
       const orders = await OrderModel.find();
       console.log(req.body);
+      
       res.status(200).json({
         message: 'Orders fetched successfully',
         orders,
