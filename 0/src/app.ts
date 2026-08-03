@@ -3,6 +3,8 @@ import express from 'express';
 //npm i dotenv
 import dotenv from 'dotenv';
 import hotelRoutes from './routes/hotelRoutes';
+import customerRoutes from './routes/customerRoutes';
+import reservationRoutes from './routes/reservationRoutes';
 const app = express();
 app.listen(3000);
 dotenv.config();
@@ -34,6 +36,8 @@ async function run(): Promise<void> {
 run().catch(console.dir);
 
 app.use('/api/hotels', hotelRoutes);
+app.use('/api/customers', customerRoutes);
+app.use('/api/reservations', reservationRoutes);
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

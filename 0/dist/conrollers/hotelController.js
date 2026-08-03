@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getHotels = void 0;
 exports.createHotel = createHotel;
 exports.addRoomToHotel = addRoomToHotel;
+exports.updateRoom = updateRoom;
+exports.deleteRoom = deleteRoom;
 const hotelModel_1 = require("../models/hotelModel");
 async function createHotel(req, res) {
     try {
@@ -37,6 +39,62 @@ async function addRoomToHotel(req, res) {
     catch (error) {
         res.status(500).json({
             message: 'Failed to add room',
+            error
+        });
+    }
+}
+async function updateRoom(req, res) {
+    try {
+        const { hotelId, roomId } = req.params;
+        const hotel = await hotelModel_1.HotelModel.findById(hotelId);
+        if (!hotel) {
+            res.status(404).json({
+                message: 'Hotel not found'
+            });
+            return;
+        }
+        const room = hotel.rooms.id(roomId);
+        if (!room) {
+            res.status(404).json({
+                message: 'Room not found'
+            });
+            return;
+        }
+        room.set(req.body);
+        await hotel.save();
+        res.status(200).json(hotel);
+    }
+    catch (error) {
+        res.status(500).json({
+            message: 'Failed to update room',
+            error
+        });
+    }
+}
+async function deleteRoom(req, res) {
+    try {
+        const { hotelId, roomId } = req.params;
+        const hotel = await hotelModel_1.HotelModel.findById(hotelId);
+        if (!hotel) {
+            res.status(404).json({
+                message: 'Hotel not found'
+            });
+            return;
+        }
+        const room = hotel.rooms.id(roomId);
+        if (!room) {
+            res.status(404).json({
+                message: 'Room not found'
+            });
+            return;
+        }
+        room.deleteOne();
+        await hotel.save();
+        res.status(200).json(hotel);
+    }
+    catch (error) {
+        res.status(500).json({
+            message: 'Failed to delete room',
             error
         });
     }

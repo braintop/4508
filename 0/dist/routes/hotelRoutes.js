@@ -6,4 +6,5 @@ const router = (0, express_1.Router)();
 router.post('/', hotelController_1.createHotel);
 router.get('/', hotelController_1.getHotels);
 router.post('/:hotelId/rooms', hotelController_1.addRoomToHotel);
+router.put('/:hotelId/rooms/:roomId', hotelController_1.updateRoom);
 exports.default = router;
