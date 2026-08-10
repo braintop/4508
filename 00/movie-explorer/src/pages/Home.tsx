@@ -18,6 +18,9 @@ export default function Home() {
             console.error("Error fetching genres:", error);
         }
     }
+    useEffect(() => {
+        fetchGenres();
+    }, []);
 
     async function handleGenreChange(genreId: string) {
         try {
@@ -59,9 +62,6 @@ export default function Home() {
 
     }
 
-    useEffect(() => {
-        fetchGenres();
-    }, []);
     return (
         <div className="page">
             <h1>Movie Explorer</h1>
