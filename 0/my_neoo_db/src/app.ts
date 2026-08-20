@@ -1,5 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors  from 'cors'
+
 dotenv.config()
 import { neon } from '@neondatabase/serverless'
 
@@ -13,6 +15,7 @@ if (!databaseUrl) {
 }
 const sql = neon(databaseUrl)
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.get('/', (_req, res) => {
   res.send('Hello Node')

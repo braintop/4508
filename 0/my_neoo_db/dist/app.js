@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const serverless_1 = require("@neondatabase/serverless");
 const databaseUrl = process.env.DATABASE_URL;
@@ -13,6 +14,7 @@ if (!databaseUrl) {
 }
 const sql = (0, serverless_1.neon)(databaseUrl);
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get('/', (_req, res) => {
     res.send('Hello Node');
@@ -95,6 +97,27 @@ app.post('/courses', async (req, res) => {
     }
     catch (error) {
         res.status(500).json({ error: 'Failed to create course' });
+    }
+});
+app.delete('/courses/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const course = await sql `DELETE FROM courses WHERE course_id = ${id}`;
+        res.json(course);
+    }
+    catch (error) {
+        res.status(500).json({ error: 'Failed to delete course' });
+    }
+});
+app.put('/courses/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { course_name } = req.body;
+        const course = await sql `UPDATE courses SET course_name = ${course_name} WHERE course_id = ${id}`;
+        res.json(course);
+    }
+    catch (error) {
+        res.status(500).json({ error: 'Failed to update course' });
     }
 });
 const server = app.listen(3002, () => {
