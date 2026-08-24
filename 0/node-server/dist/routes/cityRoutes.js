@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const cityController_1 = require("../controllers/cityController");
+const router = (0, express_1.Router)();
+router.get('/', cityController_1.getCities);
+router.get('/:id', cityController_1.getCityById);
+router.post('/', cityController_1.addCity);
+router.put('/:id', cityController_1.updateCity);
+router.delete('/:id', cityController_1.deleteCity);
+exports.default = router;
