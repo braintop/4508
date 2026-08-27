@@ -7,3 +7,6 @@ router.post('/', addCity)
 router.put('/:id', updateCity)
 router.delete('/:id', deleteCity)
 export default router
+
+// add login and register 
+// add midddle ware auth to get cities and add city

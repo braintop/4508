@@ -2,19 +2,22 @@ import type { Course } from '../types/Course'
 const API_URL = 'http://127.0.0.1:3002/courses'
 
 export const getCourses = async (): Promise<Course[]> => {
-  const response = await fetch(API_URL)
-  return response.json()
+  const response = await fetch(API_URL,{
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token') ?? ''}`
+    },
+    method: 'GET'
+  })
+  return response.json() as Promise<Course[]>
 }
-export async function addCourse(courseName: string) {
-    await fetch(API_URL, {
-      method: 'POST',
-  
-      headers: {
-        'Content-Type': 'application/json'
-      },
-  
-      body: JSON.stringify({
-        course_name: courseName
-      })
-    })
-  }
+
+export const addCourse = async (courseName: string) => {
+  const response = await fetch(API_URL, {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token') ?? ''}`
+    },
+    method: 'POST',
+    body: JSON.stringify({ course_name: courseName }),
+  })
+  return response.json() as Promise<Course>
+}

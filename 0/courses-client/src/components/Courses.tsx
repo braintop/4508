@@ -5,9 +5,17 @@ import { useState } from 'react'
 export default function Courses() {
     
     const [courses, setCourses] = useState<Course[]>([])
+    const [message, setMessage] = useState('')
     async function getAllCourses() {
         let data = await getCourses()
+        if('error' in data) {
+            setMessage(data.error as string)
+            setCourses([] as Course[])
+            return
+        }
         setCourses(data)
+        setMessage('')
+        console.log(courses)
     }
     useEffect(() => {
         getAllCourses()
@@ -17,9 +25,10 @@ export default function Courses() {
     <div>
         <h2>Courses</h2>
         <ul>
-            {courses.map((course) => (
+            {courses?.map((course) => (
                 <li key={course.course_id}>{course.course_name}</li>
             ))}
+            {message.length > 0 && <li style={{color: 'red'}}>{message}</li>}
         </ul>
     </div>
     )
