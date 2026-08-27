@@ -23,8 +23,8 @@ function authMiddleware(req, res, next) {
         throw new Error('JWT_SECRET is not set');
     }
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, secret);
-        req.user = decoded;
+        const user_hidden_data = jsonwebtoken_1.default.verify(token, secret);
+        req.user = user_hidden_data; // {user_id: 1, email: 'test@test.com', role: 'admin'}
         next();
     }
     catch (error) {

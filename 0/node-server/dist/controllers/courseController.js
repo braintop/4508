@@ -10,11 +10,7 @@ exports.deleteCourse = deleteCourse;
 const db_1 = __importDefault(require("../db"));
 const getCourses = async (req, res) => {
     try {
-        let user = req.user;
-        if (user.role !== 'admin') {
-            res.json({ error: 'Unauthorized' });
-            return;
-        }
+        //let user = req.user as any
         const courses = await (0, db_1.default) `SELECT * FROM courses`;
         res.json(courses);
     }

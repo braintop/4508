@@ -4,11 +4,7 @@ import sql from '../db'
 import { AuthRequest } from '../middleware/authMiddleware'
 export const getCourses = async (req: AuthRequest, res: Response) => {
     try {
-        let user = req.user as any
-        if(user.role !== 'admin') {
-            res.json({ error: 'Unauthorized' })
-            return
-        }
+        //let user = req.user as any
         const courses = await sql`SELECT * FROM courses`
         res.json(courses)
     } catch (error) {

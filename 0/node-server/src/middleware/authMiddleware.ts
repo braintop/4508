@@ -36,15 +36,15 @@ export function authMiddleware(
     if (!secret) {
       throw new Error('JWT_SECRET is not set')
     }
-  
+   
     try {
-      const decoded = jwt.verify(token, secret) as {
+      const user_hidden_data = jwt.verify(token, secret) as {
         user_id: number
         email: string
         role: string
       }
   
-      (req as any).user = decoded
+      req.user = user_hidden_data // {user_id: 1, email: 'test@test.com', role: 'admin'}
   
       next()
   
