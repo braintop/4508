@@ -54,3 +54,17 @@ export function authMiddleware(
       })
     }
   }
+
+
+  export function isAdmin(
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+  ) {
+    const user = req.user as any
+    if(user.role !== 'admin') {
+      res.status(403).json({ error: 'Unauthorized' })
+      return
+    }
+    next()
+  }

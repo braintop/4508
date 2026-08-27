@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import { getCities, getCityById, addCity, updateCity, deleteCity } from '../controllers/cityController'
+import { authMiddleware, isAdmin } from '../middleware/authMiddleware'
 const router = Router()
-router.get('/', getCities)
+router.get('/', authMiddleware, isAdmin, getCities)
 router.get('/:id', getCityById)
 router.post('/', addCity)
 router.put('/:id', updateCity)
