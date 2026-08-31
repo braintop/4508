@@ -1,3 +1,5 @@
+//npm install @modelcontextprotocol/sdk
+import 'dotenv/config'
 import express from 'express'
 import chatRoutes from './routes/chatRoutes'
 import cors from 'cors'
