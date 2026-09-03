@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: #f5f6f8;
+  color: #1f2430;
+}
+
+.page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+}
+
+.hint {
+  direction: rtl;
+  text-align: right;
+  color: #6b7280;
+  margin: 0 0 18px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1px solid #d3d7de;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+button {
+  margin-top: 12px;
+  padding: 10px 22px;
+  font-size: 15px;
+  color: #ffffff;
+  background: #2f5496;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #9aa5b8;
+  cursor: default;
+}
+
+.answer {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid #e6e8ec;
+}
+
+.answer h2 {
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.answer h3 {
+  font-size: 15px;
+  margin: 18px 0 6px;
+  color: #6b7280;
+}
+
+.answer ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #2f5496;
+}
