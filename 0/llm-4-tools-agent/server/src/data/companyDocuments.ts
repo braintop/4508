@@ -117,5 +117,45 @@ export const companyDocuments: CompanyDocument[] = [
       'are handled by the payment provider and are never stored on ' +
       'our servers. A customer may ask to delete their account at ' +
       'any time.'
+  },
+
+  {
+    title: 'Order Tracking',
+    content:
+      'A tracking link is sent by email as soon as the order ' +
+      'leaves our warehouse. The link shows the current location ' +
+      'of the package and the expected delivery day.'
+  },
+
+  {
+    title: 'Damaged Delivery',
+    content:
+      'If a package arrives damaged, take a photo before opening ' +
+      'it and contact support within 48 hours. We send a ' +
+      'replacement at no cost and collect the damaged item.'
+  },
+
+  {
+    title: 'Business Customers',
+    content:
+      'Companies can open a business account and receive an ' +
+      'invoice with VAT, payment within 30 days, and a discount ' +
+      'of 5 percent on orders above 5000 shekels.'
+  },
+
+  {
+    title: 'Loyalty Program',
+    content:
+      'Customers earn one point for every 10 shekels spent. ' +
+      'One hundred points can be used as a 50 shekel discount. ' +
+      'Points expire after two years.'
+  },
+
+  {
+    title: 'Newsletter',
+    content:
+      'The newsletter is sent once a week and includes new ' +
+      'products and sales. A customer can unsubscribe at any ' +
+      'time using the link at the bottom of the email.'
   }
 ]

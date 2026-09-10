@@ -22,7 +22,7 @@ const ai = new GoogleGenAI({
 
 const MODEL =
   process.env.GENERATIVE_MODEL ??
-  'gemini-2.5-flash'
+  'gemini-3.6-flash'
 
 export const NO_ANSWER =
   "I don't know based on the provided documents."
