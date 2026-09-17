@@ -1,0 +1,298 @@
+{
+  "info": {
+    "_postman_id": "8f1c2b64-5a3d-4f7e-9c21-0d5a7b3e1c90",
+    "name": "Gym Studio Classes API",
+    "description": "RESTful API לניהול שיעורי סטודיו ברשת חדרי כושר.\n\nBase URL: {{baseUrl}} (ברירת מחדל http://localhost:3000/api)\n\nכל ה-Routes הנדרשים במשימה + מקרי בדיקה לוולידציה.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api", "type": "string" },
+    { "key": "branchCode", "value": "1", "type": "string" },
+    { "key": "classCode", "value": "1", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] }
+      },
+      "response": []
+    },
+    {
+      "name": "1. כל הסניפים",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/branches", "host": ["{{baseUrl}}"], "path": ["branches"] },
+        "description": "GET /api/branches — החזרת כל סניפי חדר הכושר"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('סטטוס 200', () => pm.response.to.have.status(200));",
+              "pm.test('מוחזר מערך', () => pm.expect(pm.response.json()).to.be.an('array'));",
+              "const arr = pm.response.json();",
+              "if (arr.length) pm.collectionVariables.set('branchCode', arr[0].branch_code);"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "2. שיעורים של סניף",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/branches/{{branchCode}}/classes",
+          "host": ["{{baseUrl}}"],
+          "path": ["branches", "{{branchCode}}", "classes"]
+        },
+        "description": "GET /api/branches/:branchCode/classes — כל שיעורי הסטודיו של סניף לפי קוד סניף"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('סטטוס 200', () => pm.response.to.have.status(200));",
+              "pm.test('כולל duration_minutes', () => {",
+              "  const arr = pm.response.json();",
+              "  if (arr.length) pm.expect(arr[0]).to.have.property('duration_minutes');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "3. שיעור בודד לפי קוד",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/classes/{{classCode}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["classes", "{{classCode}}"]
+        },
+        "description": "GET /api/classes/:classCode — פרטי שיעור אחד"
+      },
+      "response": []
+    },
+    {
+      "name": "4. הוספת שיעור חדש",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Yoga Flow\",\n  \"start_time\": \"2027-01-15T08:00\",\n  \"end_time\": \"2027-01-15T09:00\",\n  \"instructor_name\": \"Dana Levi\",\n  \"max_participants\": 20\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/classes", "host": ["{{baseUrl}}"], "path": ["classes"] },
+        "description": "POST /api/classes — הוספת שיעור חדש"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('סטטוס 201', () => pm.response.to.have.status(201));",
+              "const body = pm.response.json();",
+              "if (body.class_code) pm.collectionVariables.set('classCode', body.class_code);"
+            ]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "5. עדכון שיעור קיים",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Yoga Flow - Advanced\",\n  \"start_time\": \"2027-01-15T09:00\",\n  \"end_time\": \"2027-01-15T10:15\",\n  \"instructor_name\": \"Dana Levi\",\n  \"max_participants\": 25\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/classes/{{classCode}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["classes", "{{classCode}}"]
+        },
+        "description": "PUT /api/classes/:classCode — עדכון שיעור קיים"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test('סטטוס 200', () => pm.response.to.have.status(200));"]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "6. מחיקת שיעור",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/classes/{{classCode}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["classes", "{{classCode}}"]
+        },
+        "description": "DELETE /api/classes/:classCode — מחיקת שיעור קיים"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": ["pm.test('סטטוס 200', () => pm.response.to.have.status(200));"]
+          }
+        }
+      ],
+      "response": []
+    },
+    {
+      "name": "בדיקות ולידציה",
+      "item": [
+        {
+          "name": "❌ הוספה עם זמן התחלה בעבר (400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Past Class\",\n  \"start_time\": \"2020-01-01T08:00\",\n  \"end_time\": \"2020-01-01T09:00\",\n  \"instructor_name\": \"Test\",\n  \"max_participants\": 10\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/classes", "host": ["{{baseUrl}}"], "path": ["classes"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('סטטוס 400', () => pm.response.to.have.status(400));"]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "❌ זמן התחלה אחרי זמן סיום (400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Bad Times\",\n  \"start_time\": \"2027-05-01T12:00\",\n  \"end_time\": \"2027-05-01T11:00\",\n  \"instructor_name\": \"Test\",\n  \"max_participants\": 10\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/classes", "host": ["{{baseUrl}}"], "path": ["classes"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('סטטוס 400', () => pm.response.to.have.status(400));"]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "❌ מספר משתתפים 0 (400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Zero\",\n  \"start_time\": \"2027-05-01T10:00\",\n  \"end_time\": \"2027-05-01T11:00\",\n  \"instructor_name\": \"Test\",\n  \"max_participants\": 0\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/classes", "host": ["{{baseUrl}}"], "path": ["classes"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('סטטוס 400', () => pm.response.to.have.status(400));"]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "❌ שדות חסרים (400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"class_name\": \"Only name\"\n}" },
+            "url": { "raw": "{{baseUrl}}/classes", "host": ["{{baseUrl}}"], "path": ["classes"] }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('סטטוס 400', () => pm.response.to.have.status(400));"]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "❌ שיעור שלא קיים (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/classes/999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["classes", "999999"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": ["pm.test('סטטוס 404', () => pm.response.to.have.status(404));"]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "✅ עדכון שיעור שכבר התקיים (200)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branch_code\": 1,\n  \"class_name\": \"Pilates (updated)\",\n  \"start_time\": \"2026-09-01T07:30\",\n  \"end_time\": \"2026-09-01T08:30\",\n  \"instructor_name\": \"Noa Bar\",\n  \"max_participants\": 18\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/classes/3",
+              "host": ["{{baseUrl}}"],
+              "path": ["classes", "3"]
+            },
+            "description": "עדכון מותר גם לשיעור שזמן ההתחלה שלו בעבר"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
