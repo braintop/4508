@@ -19,9 +19,9 @@ export function authMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  const authorization =
-    req.headers.authorization
-
+  const authorization =req.headers.authorization
+    
+  console.log("authorization", authorization)
   if (!authorization) {
     return res.status(401).json({
       error: 'Token is missing'
@@ -36,7 +36,7 @@ export function authMiddleware(
       error: 'Token is missing'
     })
   }
-
+console.log(token)
   const secret =
     process.env.JWT_SECRET
 

@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "chalk": "^6.0.1"
+  },
+  "name": "46-5.10.2026-basic-dockers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
