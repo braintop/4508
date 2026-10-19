@@ -1,6 +1,13 @@
 services:
+  client:
+    build: ./client
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
   api:
-    build: .
+    build: ./server
     ports:
       - "3000:3000"
     environment:

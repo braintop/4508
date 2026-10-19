@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import express from 'express';
 import productRoute from './routes/productRoute';
+import taskRoute from './routes/taskRoute';
 dotenv.config();
 const app = express();
 app.use(express.json());//middleware to parse the request body
@@ -28,6 +29,7 @@ export async function disconnectFromMongoDB() {
 }
 connectToMongoDB();
 app.use('/products', productRoute);
+app.use('/api/tasks', taskRoute);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
