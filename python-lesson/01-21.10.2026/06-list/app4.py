@@ -19,7 +19,7 @@ def show_reporot(numbers):
     
     avg = average_list(numbers)
     passed = count_passing(numbers)
-    print(f"number of grades :{len(numbers)}, Average: {avg}, Passing: {passed}")
+    print(f"number of grades :{len(numbers)}, Average: {round(avg, 2)}, Passing: {passed}")
 
 #program or main 
 num_of_students = int(input("Input numbers of students: "))
