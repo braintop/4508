@@ -1,9 +1,21 @@
 class Student:
     #phase 1 - conxtructor בנאי 
-    def __init__(self, name, age):
+    def __init__(self, name, age, password):
         self.name = name
         self.age = age
+        self.__password = password
     
+    @property # getter
+    def password(self):
+        return self.__password
+
+    @password.setter
+    def password(self, value):
+        if len(value) < 8:
+            print("Password must be at least 8 characters long")
+        else:
+            self.__password = value
+
     def print_info(self):
         print(f"Name: {self.name}, Age: {self.age}")
 
