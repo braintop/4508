@@ -28,7 +28,7 @@ class Person:
 
 class Student(Person):
     def __init__(self, name, age, password, grade):
-        super().__init__(name, age, password)
+        super().__init__(name, age, password) # פרוש המילה איניט זה לבנות ולאתחל 
         self.grade = grade
 
     def print_info(self):
