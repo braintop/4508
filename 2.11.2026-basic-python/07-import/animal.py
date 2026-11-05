@@ -24,3 +24,11 @@ class Cat(Animal):
     def make_sound(self):
         print(f"{self.name} is making sound: {self.sound}")
 
+if __name__ == "__main__":
+    d1= Dog("Dog", "Woof")
+    d1.make_sound()
+    print(d1)
+
+    c1= Cat("Cat", "Meow")
+    c1.make_sound()
+    print(c1)

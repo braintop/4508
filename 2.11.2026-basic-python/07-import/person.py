@@ -38,3 +38,11 @@ class Student(Person):
         return f"Name: {self.name}, Age: {self.age}, grade: {self.grade}"
 
 
+if __name__ == "__main__":
+    p1 = Person("Sharon", 30, "12345678")
+    p1.print_info()
+    print(p1)
+
+    s1 = Student("Sharon", 30, "12345678", 90)
+    s1.print_info()
+    print(s1)
