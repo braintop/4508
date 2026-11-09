@@ -9,6 +9,6 @@ def get_connection():
         host=os.getenv('DB_HOST', '127.0.0.1'),
         port=int(os.getenv('DB_PORT', '3306')),
         user=os.getenv('DB_USER', 'appuser'),
-        password=os.getenv('DB_PASSWORD', 'app_password_change_me'),
+        password=os.getenv('DB_PASSWORD', ''),
         database=os.getenv('DB_NAME', 'school_db'),
     )
